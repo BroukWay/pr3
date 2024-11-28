@@ -1,0 +1,51 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите число M (число строк): ");
+        int M = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите число N (число столбцов): ");
+        int N = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите множитель Q: ");
+        int Q = int.Parse(Console.ReadLine());
+
+        int[] initialRow = new int[N];
+        Console.WriteLine($"Введите {N} элементов для первой строки:");
+        for (int i = 0; i < N; i++)
+        {
+            initialRow[i] = int.Parse(Console.ReadLine());
+        }
+
+        int[,] matrix = new int[M, N];
+
+        // Формируем первую строку
+        for (int j = 0; j < N; j++)
+        {
+            matrix[0, j] = initialRow[j];
+        }
+
+        // Формируем последующие строки
+        for (int i = 1; i < M; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                matrix[i, j] = matrix[i - 1, j] * Q;
+            }
+        }
+
+        // Вывод матрицы
+        Console.WriteLine("Сформированная матрица:");
+        for (int i = 0; i < M; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                Console.Write(matrix[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
