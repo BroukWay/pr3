@@ -1,0 +1,41 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите размер массива N (N > 2): ");
+        int N = int.Parse(Console.ReadLine());
+
+        if (N <= 2)
+        {
+            Console.WriteLine("Размер массива должен быть больше 2.");
+            return;
+        }
+
+        Console.Write("Введите первый элемент массива A: ");
+        int A = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите второй элемент массива B: ");
+        int B = int.Parse(Console.ReadLine());
+
+        int[] array = new int[N];
+        array[0] = A;
+        array[1] = B;
+
+        for (int i = 2; i < N; i++)
+        {
+            array[i] = 0;
+            for (int j = 0; j < i; j++)
+            {
+                array[i] += array[j];
+            }
+        }
+
+        Console.WriteLine("Сформированный массив:");
+        foreach (int element in array)
+        {
+            Console.Write(element + " ");
+        }
+    }
+}
