@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите размер массива N: ");
+        int N = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Введите элементы массива:");
+        int[] array = new int[N];
+        for (int i = 0; i < N; i++)
+        {
+            array[i] = int.Parse(Console.ReadLine());
+        }
+
+        Console.Write("Введите номер серии K (> 1): ");
+        int K = int.Parse(Console.ReadLine());
+
+        List<int> resultArray = new List<int>(array);
+        int seriesCount = 0;
+        int i = 0;
+
+        while (i < resultArray.Count)
+        {
+            int seriesStart = i;
+            int value = resultArray[i];
+
+            // Определяем конец серии
+            while (i < resultArray.Count && resultArray[i] == value)
+            {
+                i++;
+            }
+
+            seriesCount++;
+
+            // Если нашли серию с номером K
+            if (seriesCount == K)
+            {
+                resultArray.RemoveRange(seriesStart, i - seriesStart);
+                break;
+            }
+        }
+
+        if (seriesCount < K)
+        {
+            Console.WriteLine("Серий меньше, чем K. Массив без изменений.");
+        }
+        else
+        {
+            Console.WriteLine("Массив после удаления серии K:");
+        }
+
+        foreach (int element in resultArray)
+        {
+            Console.Write(element + " ");
+        }
+    }
+}
